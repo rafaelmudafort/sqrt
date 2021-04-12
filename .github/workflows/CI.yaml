@@ -41,11 +41,12 @@ jobs:
             ${GITHUB_WORKSPACE}
       - name: Build
         working-directory: ${{runner.workspace}}/sqrt/build
-        run: cmake --build . --target newtonraphson_utest -- -j ${{env.NUM_PROCS}}
+        run: cmake --build . --target all -- -j ${{env.NUM_PROCS}}
       - name: Test
         working-directory: ${{runner.workspace}}/sqrt
         run: |
           ./build/unit_test/newtonraphson_utest
+          ./build/sqrt_fortran 4
       - name: Generate coverage report
         working-directory: ${{runner.workspace}}/sqrt
         run: |
