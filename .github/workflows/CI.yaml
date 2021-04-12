@@ -47,6 +47,9 @@ jobs:
         run: |
           ./build/unit_test/newtonraphson_utest
           ./build/sqrt_fortran 4
+          ./build/sqrt_fortran_c 4
+          ./build/sqrt_c 4
+          ./build/sqrt_c_fortran 4
       - name: Generate coverage report
         working-directory: ${{runner.workspace}}/sqrt
         run: |
