@@ -5,11 +5,11 @@ use iso_c_binding
 implicit none
 
 private :: isInteger
-public :: nr_sqrt, int_2x, int_sq, isEven
+public :: nr_sqrt, int_2x, int_sq, isEven, randn
 
 contains
 
-real(c_double) function randn()
+real(c_double) function randn() bind(c, name='randn')
   integer :: n
   integer, allocatable :: seed(:)
   real(c_double) :: r

@@ -9,6 +9,7 @@ on:
 
 env:
   FORTRAN_COMPILER: gfortran-10
+  CXX_COMPILER: g++-10
   NUM_PROCS: 8
 
 # runs-on: ${{ matrix.os }}
@@ -24,6 +25,10 @@ jobs:
         uses: actions/setup-python@v2
         with:
           python-version: '3.7'
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install numpy
       - name: Checkout
         uses: actions/checkout@main
         with:
@@ -35,6 +40,7 @@ jobs:
         run: |
           cmake \
             -DCMAKE_Fortran_COMPILER:STRING=${{env.FORTRAN_COMPILER}} \
+            -DCMAKE_CXX_COMPILER:STRING=${{env.CXX_COMPILER}} \
             -DCMAKE_BUILD_TYPE:STRING=RelWithDebInfo \
             -DBUILD_TESTING:BOOL=ON \
             -DCODECOV=ON \
@@ -50,6 +56,7 @@ jobs:
           ./build/sqrt_fortran_c 4
           ./build/sqrt_c 4
           ./build/sqrt_c_fortran 4
+          python ./unit_test.py
       - name: Generate coverage report
         working-directory: ${{runner.workspace}}/sqrt
         run: |

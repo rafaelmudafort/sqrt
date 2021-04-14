@@ -29,3 +29,4 @@ def test_int_sq():
 if __name__=="__main__":
     test_int_2x()
     test_int_sq()
+    newtonraphsonlib.randn()
